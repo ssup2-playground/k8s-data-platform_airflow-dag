@@ -19,7 +19,7 @@ dag = DAG(
     default_args=default_args,
 )
 
-k = KubernetesPodOperator(
+ingestor = KubernetesPodOperator(
     dag=dag,
     name="hello-dry-run",
     image="debian",
@@ -30,4 +30,4 @@ k = KubernetesPodOperator(
     do_xcom_push=True,
 )
 
-k.dry_run()
+ingestor
