@@ -30,4 +30,4 @@ ingestor = KubernetesPodOperator(
     do_xcom_push=True,
 )
 
-ingestor
+#ingestor
