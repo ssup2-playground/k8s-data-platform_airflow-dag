@@ -49,7 +49,7 @@ synoptic_ingestor = KubernetesPodOperator(
     task_id="synoptic-ingestor",
     image="ghcr.io/ssup2-playground/weather-southkorea-injestor-synoptic:0.1",
     container_resources=k8s_models.V1ResourceRequirements(
-        limits={"memory": "2Gi", "cpu": "500m"},
+        requests={"memory": "2Gi", "cpu": "500m"},
     ),
     env_vars={
         "AWS_REGION" : "ap-northeast-2",
