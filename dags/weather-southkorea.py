@@ -18,7 +18,7 @@ default_args = {
 
 ## Init dag
 dag = DAG(
-    "weather-southkorea-ingestor-synoptic",
+    dag_id="weather-southkorea-ingestor-synoptic",
     default_args=default_args,
 )
 
