@@ -54,7 +54,7 @@ synoptic_ingestor = KubernetesPodOperator(
     env_vars={
         "AWS_REGION" : "ap-northeast-2",
         "AWS_S3_BUCKET" : "weather-southkorea-data",
-        "AWS_S3_DIRECTORY" : "synoptic-houly",
+        "AWS_S3_DIRECTORY" : "synoptic-hourly",
         "REQUEST_DATE" : "{{ execution_date.subtract(hours=1) | ds_nodash }}",
         "REQUEST_HOUR" : "{{ execution_date.subtract(hours=1).hour }}",
     },
