@@ -13,13 +13,13 @@ default_args = {
     'start_date': datetime(2023, 11, 1),
     'retries': 10,
     'retry_delay': timedelta(minutes=5),
-    'schedule_interval': '@hourly',
 }
 
 ## Init dag
 dag = DAG(
     dag_id="weather-southkorea-ingestor-synoptic",
     default_args=default_args,
+    schedule=timedelta(hours=1)
 )
 
 ## Init operators
