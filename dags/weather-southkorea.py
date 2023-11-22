@@ -17,7 +17,7 @@ default_args = {
 
 ## Init dag
 dag = DAG(
-    dag_id="weather-southkorea-ingestor-synoptic",
+    dag_id="weather-southkorea",
     default_args=default_args,
     schedule=timedelta(hours=1),
     max_active_tasks=1
