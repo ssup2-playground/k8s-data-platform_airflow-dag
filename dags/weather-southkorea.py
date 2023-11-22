@@ -4,13 +4,14 @@ from airflow import DAG
 from airflow.kubernetes.secret import Secret
 from airflow.providers.cncf.kubernetes.operators.pod import KubernetesPodOperator
 
+import pendulum
 from kubernetes.client import models as k8s_models
 
 ## Set default args
 default_args = {
     "owner": "airflow",
     "depends_on_past": False,
-    "start_date": datetime(2023, 11, 1),
+    "start_date": datetime(2023, 11, 1, tzinfo=pendulum.timezone("Asia/Seoul")),
     "retries": 5,
     "retry_delay": timedelta(minutes=10),
 }
