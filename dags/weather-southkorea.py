@@ -11,8 +11,8 @@ default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
     'start_date': datetime(2023, 11, 1),
-    'retries': 10,
-    'retry_delay': timedelta(minutes=5),
+    'retries': 5,
+    'retry_delay': timedelta(minutes=10),
 }
 
 ## Init dag
@@ -47,7 +47,7 @@ secret_data_key_env = Secret(
 synoptic_ingestor = KubernetesPodOperator(
     dag=dag,
     task_id="synoptic-ingestor",
-    image="ghcr.io/ssup2-playground/weather-southkorea-injestor-synoptic:0.1.1",
+    image="ghcr.io/ssup2-playground/weather-southkorea-injestor-synoptic:0.1.2",
     container_resources=k8s_models.V1ResourceRequirements(
         requests={"memory": "2Gi", "cpu": "500m"},
     ),
