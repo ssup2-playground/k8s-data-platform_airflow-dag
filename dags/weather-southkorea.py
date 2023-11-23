@@ -11,7 +11,7 @@ from kubernetes.client import models as k8s_models
 default_args = {
     "owner": "airflow",
     "depends_on_past": False,
-    "start_date": datetime(2023, 11, 1, tzinfo=pendulum.timezone("Asia/Seoul")),
+    "start_date": datetime(2023, 1, 1, tzinfo=pendulum.timezone("Asia/Seoul")),
     "retries": 5,
     "retry_delay": timedelta(minutes=10),
 }
@@ -21,7 +21,7 @@ dag = DAG(
     dag_id="weather-southkorea",
     default_args=default_args,
     schedule=timedelta(hours=1),
-    max_active_tasks=2,
+    max_active_tasks=1,
 )
 
 ## Init operators
