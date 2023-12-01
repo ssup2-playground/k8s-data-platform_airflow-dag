@@ -21,7 +21,7 @@ dag = DAG(
     dag_id="weather-southkorea",
     default_args=default_args,
     schedule=timedelta(hours=1),
-    max_active_tasks=1,
+    max_active_tasks=2,
 )
 
 ## Init operators
