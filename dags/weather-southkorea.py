@@ -49,7 +49,7 @@ secret_data_key_env = Secret(
 synoptic_ingestor = KubernetesPodOperator(
     dag=dag,
     task_id="synoptic-ingestor",
-    image="ghcr.io/ssup2-playground/weather-southkorea-injestor-synoptic:0.1.4",
+    image="ghcr.io/ssup2-playground/weather-southkorea-injestor-synoptic:0.1.5",
     container_resources=k8s_models.V1ResourceRequirements(
         requests={"memory": "2Gi", "cpu": "500m"},
     ),
