@@ -7,18 +7,15 @@ from airflow.providers.cncf.kubernetes.operators.pod import KubernetesPodOperato
 import pendulum
 from kubernetes.client import models as k8s_models
 
-## Set default args
-default_args = {
-    "owner": "airflow",
-    "depends_on_past": False,
-    "retries": 5,
-    "retry_delay": timedelta(minutes=10),
-}
-
 ## Init dag
 dag = DAG(
     dag_id="weather-southkorea",
-    default_args=default_args,
+    default_args={
+        "owner": "airflow",
+        "depends_on_past": False,
+        "retries": 5,
+        "retry_delay": timedelta(minutes=10),
+    },
     start_date=datetime(2023, 1, 1, tzinfo=pendulum.timezone("Asia/Seoul")),
     schedule="@hourly",
     catchup=True,
