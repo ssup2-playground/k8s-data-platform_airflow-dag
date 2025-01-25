@@ -9,7 +9,7 @@ from kubernetes.client import models as k8s_models
 
 ## Init dag
 dag = DAG(
-    dag_id="weather-southkorea",
+    dag_id="southkorea-weather",
     default_args={
         "owner": "airflow",
         "depends_on_past": False,
@@ -23,20 +23,6 @@ dag = DAG(
 )
 
 ## Init operators
-secret_aws_access_env = Secret(
-    deploy_type="env",
-    deploy_target="AWS_KEY_ACCESS",
-    secret="aws-secret",
-    key="AWS_KEY_ACCESS",
-)
-
-secret_aws_secret_env = Secret(
-    deploy_type="env",
-    deploy_target="AWS_KEY_SECRET",
-    secret="aws-secret",
-    key="AWS_KEY_SECRET",
-)
-
 secret_data_key_env = Secret(
     deploy_type="env",
     deploy_target="DATA_KEY",
@@ -44,22 +30,24 @@ secret_data_key_env = Secret(
     key="DATA_KEY",
 )
 
-synoptic_ingestor = KubernetesPodOperator(
+ingestor = KubernetesPodOperator(
     dag=dag,
     task_id="synoptic-ingestor",
-    image="ghcr.io/ssup2-playground/weather-southkorea-injestor-synoptic:0.1.6",
+    image="ghcr.io/ssup2-playground/southkorea-weather-data-ingestor:0.1.7",
     container_resources=k8s_models.V1ResourceRequirements(
         requests={"memory": "2Gi", "cpu": "500m"},
     ),
     env_vars={
-        "AWS_REGION" : "ap-northeast-2",
-        "AWS_S3_BUCKET" : "weather-southkorea-data",
-        "AWS_S3_DIRECTORY" : "synoptic-hourly",
+        "MINIO_ENDPOINT" : "192.168.1.89:9000",
+        "MINIO_ACCESS_KEY" : "root",
+        "MINIO_SECRET_KEY" : "root123!",
+        "MINIO_BUCKET" : "southkorea-weather",
+        "MINIO_DIRECTORY" : "hourly-parquet",
         "REQUEST_DATE" : "{{ execution_date.subtract(hours=24) | ds_nodash }}",
         "REQUEST_HOUR" : "{{ execution_date.subtract(hours=24).hour }}",
     },
-    secrets=[secret_aws_access_env, secret_aws_secret_env, secret_data_key_env],
+    secrets=[secret_data_key_env],
 )
 
 ## Run
-synoptic_ingestor
+ingestor

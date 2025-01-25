@@ -1,12 +1,24 @@
 # Weather SouthKorea Airflow DAG
 
-## Create k8s secrets
+## Python venv setup
 
-* AWS access key, AWS secret key
+Instructions for setting up a Python virtual environment for local development.
 
 ```bash
-$ kubectl -n airflow create secret generic aws-secret --from-literal=AWS_KEY_ACCESS=[access key] --from-literal=AWS_KEY_SECRET=[secret key]
+# Create virtual environment
+$ python3 -m venv venv
+
+# Activate virtual environment
+$ source venv/bin/activate
+
+# Install required packages
+$ pip3 install -r requirements.txt
+
+# Deactivate virtual environment when done
+$ deactivate
 ```
+
+## Create k8s secrets
 
 * Data key
 
