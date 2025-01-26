@@ -33,7 +33,7 @@ secret_data_key_env = Secret(
 ingestor = KubernetesPodOperator(
     dag=dag,
     task_id="ingestor",
-    image="ghcr.io/ssup2-playground/southkorea-weather-data-ingestor:0.1.7",
+    image="ghcr.io/ssup2-playground/southkorea-weather-data-ingestor:0.2.0",
     container_resources=k8s_models.V1ResourceRequirements(
         requests={"memory": "2Gi", "cpu": "500m"},
     ),
