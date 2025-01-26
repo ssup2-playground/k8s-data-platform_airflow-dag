@@ -19,7 +19,7 @@ dag = DAG(
     start_date=datetime(2023, 1, 1, tzinfo=pendulum.timezone("Asia/Seoul")),
     schedule="@hourly",
     catchup=True,
-    max_active_tasks=4,
+    max_active_tasks=2,
 )
 
 ## Init operators
